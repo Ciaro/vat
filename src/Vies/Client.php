@@ -25,6 +25,11 @@ class Client
     protected $timeout;
 
     /**
+     * @var object|null
+     */
+    protected $viesResponse;
+
+    /**
      * Client constructor.
      *
      * @param int $timeout How long should we wait before aborting the request to VIES?
@@ -45,7 +50,7 @@ class Client
     public function checkVat(string $countryCode, string $vatNumber) : bool
     {
         try {
-            $response = $this->getClient()->checkVat(
+            $this->viesResponse = $this->getClient()->checkVat(
                 array(
                     'countryCode' => $countryCode,
                     'vatNumber' => $vatNumber
@@ -55,7 +60,15 @@ class Client
             throw new ViesException($e->getMessage(), $e->getCode());
         }
 
-        return (bool) $response->valid;
+        return (bool) $this->viesResponse->valid;
+    }
+
+    /**
+     * @return object|null
+     */
+    public function getViesResponse()
+    {
+        return $this->viesResponse;
     }
 
     /**
