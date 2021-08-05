@@ -28,9 +28,6 @@
       "Ibericode\\Vat\\Tests\\": "tests/"
     }
   },
-  "config": {
-    "preferred-install": "dist"
-  },
   "suggest": {
     "ibericode/vat-bundle": "Symfony bundle for integrating this package",
     "ext-soap": "Needed to support VIES VAT number validation"
